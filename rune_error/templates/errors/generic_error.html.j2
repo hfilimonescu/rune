@@ -1,0 +1,11 @@
+{% from 'theme/comps.text.html.j2' import header %}
+
+{% extends 'base.html.j2' %}
+
+{% block pageheader %}
+  {{ header(error.code ~ ': ' ~ error.name) }}
+{% endblock pageheader %}
+
+{% block appcontent %}
+  <p class="description error">{{error.description}}</p>
+{% endblock appcontent %}
