@@ -2,13 +2,14 @@ import os
 
 
 class Config:
-    BABEL_DOMAIN = 'rhhr'
+    BABEL_DOMAIN = 'rune'
     BABEL_TRANSLATION_DIRECTORIES = os.path.join(
         os.path.dirname(__file__), 'translations')
 
     SQLALCHEMY_DATABASE_URI = 'sqlite:///'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    RUNE_APPS = []
     RUNE_ADMINS = [
         'rune@rhhr.ro',
         'ddic@rhhr.ro',
@@ -23,6 +24,7 @@ class Config:
     RUNE_LOG_STDOUT = False
     RUNE_NAME = 'Rune'
     RUNE_UI_APP_LOGO = 'hagalaz.png'
+    RUNE_MAIL_SUBJECT_PREFIX = RUNE_NAME + ': '
 
     MAIL_SERVER = None
     MAIL_PORT = 465
