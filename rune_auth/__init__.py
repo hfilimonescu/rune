@@ -8,7 +8,7 @@ login = LoginManager()
 login.login_view = 'auth.login'
 login.login_message_category = 'info'
 
-__version__ = '1.0.2.dev'
+__version__ = '0.2.0'
 
 
 class Auth:

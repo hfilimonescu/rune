@@ -27,7 +27,7 @@ from sqlalchemy import MetaData
 
 from .config import Config
 
-__version__ = '0.1.1.dev'
+__version__ = '0.2.0'
 
 
 # https://stackoverflow.com/a/46785675
