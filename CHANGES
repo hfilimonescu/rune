@@ -2,12 +2,26 @@ Rune Changelog
 ==============
 
 
-Version 0.1.1.dev
+Version 0.2.0
 -------------
 
-Released on October 28th 202x
+Released on December 3rd 2020
 
--   
+-   Update rune.__init__ to use all new packages
+-   Add translations `de` and `ro`
+-   Add hagalaz.png
+-   Update make-release
+-   Add rune.util
+-   Add rune.cli
+-   Add rune.database
+-   Add rune.config
+-   Add rune_theme
+-   Add rune_main
+-   Add rune_error
+-   Add rune_basis
+-   Add rune_auth
+-   Add rune_admin
+-   Update gitignore with Rune specific files
 
 
 Version 0.1.0

@@ -35,7 +35,9 @@ class Auth:
         def before_request():
             """Logout all users who have been deactivated after
             their login. This applies to all requests to the app,
-            not for the blueprint."""
+            not for the blueprint. """
+            #pylint: disable=unused-argument
+
             if current_user.is_authenticated and not current_user.active:
                 flash(_('Your account is not active!'), 'error')
                 logout_user()

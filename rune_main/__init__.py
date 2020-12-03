@@ -19,6 +19,7 @@ class Main:
         @bp.before_request
         @login_required
         def before_request():
+            #pylint: disable=unused-argument
             pass
 
         from . import admin  # noqa

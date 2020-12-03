@@ -36,6 +36,8 @@ class Error:
 
             source: https://flask.palletsprojects.com/en/1.1.x/errorhandling/#generic-exception-handlers
             """
+            #pylint: disable=unused-variable
+
             if request.is_json:
                 """Return JSON instead of HTML for HTTP errors."""
                 response = e.get_response()
