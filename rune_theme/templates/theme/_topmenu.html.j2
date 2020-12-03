@@ -1,0 +1,51 @@
+{% from 'theme/comps.icons.html.j2' import la %}
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <a href="{{ url_for(config.get('RUNE_MAIN_VIEW')) }}" class="navbar-brand mb-0 h1">
+    {# {{ config.get('APP_NAME', 'Rune') }} #}
+    <img src="{{ url_for('static', filename=config.get('RUNE_UI_APP_LOGO', 'hagalaz.png')) }}"
+         alt="{{ config.get('APP_NAME', 'Rune') }}"
+         height="24px">
+  </a>
+
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mt-2 mt-lg-0">
+      {%- for item in current_menu.children -%}
+        {%- if item.visible -%}
+          <li class="nav-item {{ 'active' if item.active }}">
+            <a href="{{ item.url }}" class="btn btn-light {{ 'active' if item.active }} mr-1">
+              {{ la(icon) if icon }}
+              {{ item.text }}
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+      {% if current_user.is_authenticated %}
+        <li class="nav-item dropdown">
+          {% set items_ = [(_('About Rune'), 'main.about', True, 'info')] %}
+
+          {% for item in current_menu.submenu('auth').children %}
+            {%- if item.visible -%}
+              {% do items_.append((item.text, item._endpoint, item.divided, item.icon)) %}
+            {%- endif -%}
+          {% endfor %}
+
+          {{ dropdown(text=current_user.name, items=items_, right=True) }}
+        </li>
+      {% else %}
+        <li>
+          {# {{ link(_('Login'), url_for('auth.login')) }} #}
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

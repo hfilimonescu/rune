@@ -1,0 +1,7 @@
+{% macro la(icon=None, extra_classes=[]) %}
+  <i class="fas fa-{{- icon }} {{ extra_classes | join(' ')}}"></i>
+{% endmacro %}
+
+{% macro fa(icon, extra_classes=[]) %}
+  {{ la(icon=icon, extra_classes=extra_classes) }}
+{% endmacro %}
