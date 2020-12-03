@@ -1,4 +1,8 @@
 class Config:
+    BABEL_DOMAIN = 'rhhr'
+    BABEL_TRANSLATION_DIRECTORIES = os.path.join(
+        os.path.dirname(__file__), 'translations')
+
     SQLALCHEMY_DATABASE_URI = 'sqlite:///'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
