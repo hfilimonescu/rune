@@ -1,0 +1,20 @@
+<div class="btn-group-xs">
+  {% if current_menu.active_item.children %}
+    {% for item in current_menu.active_item.children %}
+      {% if item.itemmenu is defined and item.itemmenu() %}
+        {{  btn_a(text=item.text,
+                  icon=item.icon,
+                  type=item.type,
+                  url=url_for(item._endpoint)) }}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {{ btn_m(type='primary',
+           icon='pen',
+           size='xs',
+           text=_('Edit'),
+           target='#createPreference',
+           **{'data-name':preference.name,
+              'data-value': preference.value }) }}
+</div>

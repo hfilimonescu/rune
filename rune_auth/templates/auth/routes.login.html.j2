@@ -1,0 +1,38 @@
+{% extends "auth/routes.base.html.j2" %}
+{% from "bootstrap/utils.html" import flashed_messages %}
+
+
+{% block navbar %}
+  {# Hide the NavBar on the login page #}
+{% endblock %}
+
+{% block pagemenu %}
+  {# Hide Pagemenu and avoid errors in login page #}
+{% endblock pagemenu %}
+
+{% block content -%}
+<div class="mt-5">
+  <div class="col-md-3 mx-auto align-middle">
+    <h1 class="page-header">
+      <img src="{{ url_for('static', filename=config['RUNE_UI_APP_LOGO']) }}"
+           alt="Rune Logo"
+           style="display: block; margin: 0 auto; padding-bottom: 15px;"
+           height="110px">
+      {{ _('Login') }}
+    </h1>
+    {{ flashed_messages(container=False, dismissible=True) }}
+
+    {{ form | render_form(extra_classes="",
+                          button_map={'submit': 'primary btn-block'}) }}
+
+    {% if config['RUNE_AUTH_LOGIN_FORGOTTEN'] %}
+      <p class="pt-3">
+        {{ _('I have forgoten my password.') }}
+        <a href="{{ url_for('auth.reset_password') }}">
+          {{ _('Reset my password') }}
+        </a>
+      </p>
+    {% endif %}
+  </div>
+</div>
+{%- endblock %}

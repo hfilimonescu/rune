@@ -1,0 +1,35 @@
+{% extends "auth/admin.base.html.j2" %}
+{% import "bootstrap/utils.html" as util %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block pageheader %}
+  {{ header(_("Assign Users to Role `{}`".format(role.name))) }}
+{% endblock pageheader %}
+
+{% block appcontent -%}
+  <form class="form-horizontal" method="post">
+    {{ form.hidden_tag() }}
+    {{ wtf.form_errors(form, hiddens="only") }}
+
+    <div class="row">
+      {% for user in users %}
+        <div class="col-sm-4 pb-4">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="users"
+                    value="{{ user.username }}"
+                    {{ 'checked' if role.name in user.roles }}>
+              {{ user.name }}
+            </label>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <p>
+      {{ wtf.form_field(form.submit,
+                        form_type='horizontal',
+                        horizontal_columns=('lg', 0, 12),
+                        button_map={'submit': 'primary btn-block'}) }}
+    </p>
+  </form>
+{%- endblock %}

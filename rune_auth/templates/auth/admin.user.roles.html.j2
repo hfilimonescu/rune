@@ -1,0 +1,31 @@
+{% extends "auth/admin.base.html.j2" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block appcontent -%}
+  <form class="form-horizontal" method="post">
+    {{ form.hidden_tag() }}
+    {{ wtf.form_errors(form, hiddens="only") }}
+
+    <div class="row">
+      {% for group in roles | groupby('group') %}
+        <div class="col-sm-3">
+          <p class="h4">{{ group.grouper }}</p>
+          {% for role in group.list %}
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" name="roles"
+                       value="{{ role.name }}"
+                       {{ 'checked' if role.name in user.roles }}>
+                {{ role.name }}
+              </label>
+            </div>
+          {% endfor %}
+        </div>
+        {# {{ divisible(loop, 4) }} #}
+      {% endfor %}
+    </div>
+    <p>
+      {{ wtf.form_field(form.submit, form_type='horizontal', horizontal_columns=('lg', 0, 3), button_map={'submit': 'success btn-block'}) }}
+    </p>
+  </form>
+{%- endblock %}

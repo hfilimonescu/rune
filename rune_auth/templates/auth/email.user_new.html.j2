@@ -1,0 +1,17 @@
+<p>
+  Dear {{ user.name }},
+</p>
+
+<p>
+  Your password is: <strong>{{ password }}</strong>
+</p>
+<p>
+  {% trans link=url_for('auth.login', _external=True), text=config['APP_NAME'] -%}
+    Visit <a href="{{ link }}">{{ text }}</a> and change your password as soon as possible.
+  {%- endtrans %}
+</p>
+
+<p>
+  Regards,<br>
+  The <code>Rune</code> admin
+</p>

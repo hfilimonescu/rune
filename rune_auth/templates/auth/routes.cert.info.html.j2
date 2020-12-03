@@ -1,0 +1,8 @@
+{% extends "auth/routes.base.html.j2" %}
+
+{% block appcontent %}
+  {{ field('Serial', b(serial)) }}
+  {% for key, value in s_dn_data.items() %}
+    {{ field(key, b(value)) }}
+  {% endfor %}
+{% endblock %}

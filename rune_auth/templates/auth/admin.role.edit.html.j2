@@ -1,0 +1,70 @@
+{% extends "auth/admin.base.html.j2" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block appcontent -%}
+  <form class="form-horizontal" method="post" id="auth_role_edit">
+    {{ form.hidden_tag() }}
+    {{ wtf.form_field(form.name,
+                      form_type='horizontal',
+                      horizontal_columns=('lg', 3, 6)) }}
+    {{ wtf.form_field(form.description,
+                      form_type='horizontal',
+                      horizontal_columns=('lg', 3, 6)) }}
+    {{ wtf.form_field(form.submit,
+                      form_type='horizontal',
+                      horizontal_columns=('lg', 3, 6),
+                      button_map={'submit': 'primary btn-block'}) }}
+
+    <h4>Permissions</h4>
+    <div class="row">
+      {% for group in permissions | groupby('group') %}
+        <div class="col-sm-4 pb-4">
+          {{  btn_a(text=group.grouper,
+                    url='#toggle',
+                    size='sm',
+                    design='secondary',
+                    extra_classes=['toggler'],
+                    **{ 'data-target': group.grouper }) }}
+          {% for permission in group.list | sort(attribute='name') %}
+            <div class="checkbox">
+              <label>
+                <input  type="checkbox"
+                        name="permissions"
+                        class="{{ group.grouper }}"
+                        value="{{ permission.name }}"
+                        {{ ('checked' if permission in role.permissions) if role is defined }}>
+                {{ permission.name }}
+              </label>
+            </div>
+          {% endfor %}
+        </div>
+        {# {{ divisible(loop, 3, True) }} #}
+      {% endfor %}
+    </div>
+
+    {{ wtf.form_field(form.submit,
+                      form_type='horizontal',
+                      horizontal_columns=('lg', 0, 12),
+                      button_map={'submit': 'primary btn-block'}) }}
+  </form>
+{%- endblock %}
+
+
+{% block scripts %}
+  {{ super() }}
+  <script language="JavaScript">
+    $('.toggler').click(function() {
+      // console.log('Start');
+      var target = $(this).data('target');
+      var checkboxes = document.getElementsByClassName(target);
+      var initial_status = checkboxes[0].checked;
+
+      for (var i = 0, n = checkboxes.length; i < n; i++) {
+        if (!checkboxes[i].disabled) {
+          checkboxes[i].checked = !initial_status;
+        }
+      }
+    });
+  </script>
+{% endblock %}
