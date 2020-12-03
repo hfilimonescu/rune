@@ -2,12 +2,17 @@ Rune Changelog
 ==============
 
 
-Version 0.2.1.dev
+Version 0.2.1
 -------------
 
-Released on Montober 28th 2021
+Released on December 3rd 2020
 
--   
+-   Tests: Add factory test and default config tests (#1)
+-   Config add Rune keys
+-   Config import os
+-   Config Babel
+-   Config SQLALCHEMY_TRACK_MODIFICATIONS
+-   Add favicon.ico
 
 
 Version 0.2.0
