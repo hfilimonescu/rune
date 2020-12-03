@@ -82,7 +82,15 @@ def set_filename_version(filename, version_number, pattern):
 
 def set_init_version(version):
     info('Setting __init__.py version to %s', version)
-    package_list = ['rune']
+    package_list = [
+        'rune',
+        'rune_admin',
+        'rune_auth',
+        'rune_basis',
+        'rune_error',
+        'rune_main',
+        'rune_theme',
+    ]
     for package in package_list:
         set_filename_version(f'{package}/__init__.py', version, '__version__')
 
@@ -114,7 +122,7 @@ def set_changelog_version(version):
         contents.insert(4, 'Version {0}\n'.format(version))
         contents.insert(5, '-------------\n')
         contents.insert(6, '\n')
-        contents.insert(7, 'Released on October 28th 202x\n')
+        contents.insert(7, 'Released on Montober 28th 2021\n')
         contents.insert(8, '\n')
         contents.insert(9, '-   \n')
         contents.insert(10, '\n')
