@@ -1,3 +1,6 @@
+import os
+
+
 class Config:
     BABEL_DOMAIN = 'rhhr'
     BABEL_TRANSLATION_DIRECTORIES = os.path.join(
