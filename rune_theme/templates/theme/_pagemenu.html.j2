@@ -1,5 +1,7 @@
 {# Create Back button in the Pagemenu #}
-{% if current_menu.active_item.parent._endpoint %}
+{# {% if current_menu.active_item.parent._endpoint %} #}
+{% if current_menu.active_item.parent is defined
+   and current_menu.active_item.parent._endpoint %}
   {{ btn_a(current_menu.active_item.parent.text,
            url=current_menu.active_item.parent.url,
            design='light',
