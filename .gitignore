@@ -132,4 +132,7 @@ dmypy.json
 .vscode
 
 # Rune specific files
-rune.db
+*rune.db
+*rune.conf
+.flaskenv
+.env
