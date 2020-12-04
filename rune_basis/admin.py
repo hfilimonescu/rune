@@ -102,7 +102,7 @@ def basis_main():
     '.admin.basis.apps',
     _('Rune Apps'),
     visible_when=lambda: cu.hp('BASIS_ADMIN-LIST'),
-    order=99,
+    order=10,
     # design='warning',
     icon='cog',
 )
@@ -153,7 +153,7 @@ def basis_apps():
     _('Clean'),
     visible_when=lambda: False,
     pagemenu=lambda: cu.hp('BASIS_ADMIN-PERMISSIONS-CLEAN'),
-    order=99,
+    order=0,
     icon='broom',
 )
 @permission_required('BASIS_ADMIN-PERMISSIONS-CLEAN')
@@ -206,7 +206,7 @@ def basis_apps_clean():
     '.admin.basis.versions',
     _('Versions'),
     visible_when=lambda: cu.hp('BASIS_ADMIN-LIST'),
-    order=99,
+    order=80,
     # design='info',
     icon='cog',
 )
@@ -226,4 +226,21 @@ def basis_versions():
         'basis/admin.packages.list.html.j2',
         form=form,
         packages=packages,
+    )
+
+
+@bp.route('/basis/menu/', methods=['GET'])
+@register_menu(
+    bp,
+    '.admin.basis.menu',
+    _('Menu'),
+    visible_when=lambda: cu.hp('BASIS_ADMIN-MENU'),
+    order=30,
+    # design='info',
+    icon='cog',
+)
+@permission_required('BASIS_ADMIN-MENU')
+def basis_menu():
+    return render_template(
+        'basis/admin.menu.html.j2'
     )

@@ -1,0 +1,16 @@
+{% extends 'admin.base.html.j2' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block appcontent %}
+<ul class="text-monospace">
+  {% for item in current_menu.children recursive %}
+    <li>
+      {{ item.order }} | {{ item.text }} | {{ item.url }} | {{ item.visible }}
+        <ul>
+          {{ loop(item.children) }}
+        </ul>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}
