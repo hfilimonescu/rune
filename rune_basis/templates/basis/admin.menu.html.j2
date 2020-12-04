@@ -11,9 +11,10 @@
       | {{ item.order }}
       | {{ item.text }}
       | {{ item.url }}
-      | {{ item.visible }}
-      | {{ item.pagemenu() if item.pagemenu is defined else 'N/A' }}
-      | {{ item.parent.name or 'N/P' }}
+      | {{ 'vis' if item.visible else '!vis' }}
+      | {{ ('pgm' if item.pagemenu()) if item.pagemenu is defined else '!pgm' }}
+      | {{ ('itm' if item.itemmenu()) if item.itemmenu is defined else '!itm' }}
+      | {{ item.parent.name or 'n/p' }}
         <ul>
           {{ loop(item.children) }}
         </ul>
