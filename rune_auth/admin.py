@@ -89,7 +89,7 @@ def auth_user_create():
     bp,
     '.admin.auth.user.read',
     _('View'),
-    order=10,
+    order=20,
     type='light',
     icon='eye',
     visible_when=lambda: False,
@@ -110,7 +110,7 @@ def auth_user_read(username):
     bp,
     '.admin.auth.user.edit',
     _('Edit'),
-    order=20,
+    order=30,
     type='light',
     icon='pen',
     visible_when=lambda: False,
@@ -154,7 +154,7 @@ def auth_user_edit(username):
     bp,
     '.admin.auth.user.roles',
     _('Roles'),
-    order=30,
+    order=50,
     type='light',
     icon='boxes',
     visible_when=lambda: False,
@@ -185,6 +185,16 @@ def auth_user_roles(username):
 
 
 @bp.route('/auth/user/<username>/delete/')
+@register_menu(
+    bp,
+    '.admin.auth.user.delete',
+    _('Delete'),
+    order=40,
+    type='light',
+    icon='trash',
+    visible_when=lambda: False,
+    endpoint_arguments_constructor=lambda: dict(username='user'),
+    itemmenu=lambda: cu.hp('AUTH_ADMIN-USER-DELETE'))
 @permission_required('AUTH_ADMIN-USER-DELETE')
 def auth_user_delete(username):
     if cu.username == username:
@@ -287,7 +297,7 @@ def auth_role_create():
     bp,
     '.admin.auth.role.read',
     _('View'),
-    order=10,
+    order=20,
     type='primary',
     icon='eye',
     visible_when=lambda: False,
@@ -304,7 +314,7 @@ def auth_role_read(name):
     bp,
     '.admin.auth.role.edit',
     _('Edit'),
-    order=20,
+    order=30,
     type='light',
     icon='pen',
     visible_when=lambda: False,
@@ -340,7 +350,7 @@ def auth_role_edit(name):
     bp,
     '.admin.auth.role.delete',
     _('Delete'),
-    order=90,
+    order=40,
     type='danger',
     icon='trash',
     visible_when=lambda: False,
@@ -366,7 +376,7 @@ def auth_role_delete(name):
     bp,
     '.admin.auth.role.users',
     _('Users'),
-    order=30,
+    order=50,
     type='light',
     icon='user',
     visible_when=lambda: False,

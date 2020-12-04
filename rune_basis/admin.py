@@ -153,7 +153,7 @@ def basis_apps():
     _('Clean'),
     visible_when=lambda: False,
     pagemenu=lambda: cu.hp('BASIS_ADMIN-PERMISSIONS-CLEAN'),
-    order=0,
+    order=10,
     icon='broom',
 )
 @permission_required('BASIS_ADMIN-PERMISSIONS-CLEAN')
@@ -235,7 +235,7 @@ def basis_versions():
     '.admin.basis.menu',
     _('Menu'),
     visible_when=lambda: cu.hp('BASIS_ADMIN-MENU'),
-    order=30,
+    order=20,
     # design='info',
     icon='cog',
 )

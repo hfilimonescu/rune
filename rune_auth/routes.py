@@ -204,7 +204,7 @@ def preferences():
     '.auth.preference.create',
     _('Add Preference'),
     icon='plus-square',
-    order=20,
+    order=10,
     type='primary',
     visible_when=lambda: False,
     pagemenu=lambda: True)
