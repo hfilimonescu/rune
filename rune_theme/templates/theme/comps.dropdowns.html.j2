@@ -1,0 +1,35 @@
+{% from 'theme/comps.buttons.html.j2' import link %}
+
+
+{% macro separator() %}
+    <div class="dropdown-divider"></div>
+{% endmacro %}
+
+{% macro dropdown(text=None,
+                  design='light',
+                  size=None,
+                  right=False,
+                  items=[]) %}
+
+  {% set id_ = range(1,50) | random %}
+
+  {# {% if items %} #}
+  <div class="dropdown">
+    <button class="btn btn-{{ design }} dropdown-toggle" type="button" id="{{ id_ }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{ text or _('Dropdown')}}
+    </button>
+    <div class="dropdown-menu {{ 'dropdown-menu-right' if right else '' }}" aria-labelledby="{{ id_ }}">
+
+      {% for link_text, link_url, link_separated, link_icon in items %}
+        {{ separator() if link_separated and (loop.index0 != 0) }}
+        {{ link(text=link_text, url=url_for(link_url), icon=link_icon, extra_classes=['dropdown-item']) }}
+
+        {{ separator() if link_separated and (loop.index0 == 0) }}
+      {% endfor %}
+
+    </div>
+  </div>
+  {# {% endif %} #}
+
+
+{% endmacro %}

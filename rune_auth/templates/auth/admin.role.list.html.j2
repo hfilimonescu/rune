@@ -1,0 +1,49 @@
+{% extends "auth/admin.base.html.j2" %}
+{% import "bootstrap/utils.html" as util %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block appcontent -%}
+<table class="table {{ ui_table() }}">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th class="">{{ _('Group') }}</th>
+      <th class="">{{ _('Name') }}</th>
+      <th class="">{{ _('Description') }}</th>
+      <th class="">{{ _('Users') }}</th>
+      <th class="d-print-none loop-index">{{ _('Actions') }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for role in role_list %}
+      <tr>
+        <th class="loop-index">{#{ role.id }#} {{ loop.index }}</th>
+        <td>{{ b(role.group) if role.system else role.group }}</td>
+        <td>{{ role.name }}</td>
+        <td>{{ role.description }}</td>
+        <td class="{{ 'danger' if role.system and role.users.count() }}">
+          {% for user in role.users %}
+            {{ (user.name or user.username) ~ '<br>' if loop.index < 4 }}
+            {{ i(_('[Total %(total)s]', total=b(role.users.count()))) if loop.index == 4 }}
+          {% endfor %}
+        </td>
+        <td class="d-print-none loop-index">
+          {% include 'auth/admin.role.menu.html.j2' %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{%- endblock %}
+
+
+{% block scripts %}
+  {{ super() }}
+
+  <script>
+    $('#createRole').on('shown.bs.modal', function () {
+      $('#name').focus()
+    })
+  </script>
+{% endblock %}

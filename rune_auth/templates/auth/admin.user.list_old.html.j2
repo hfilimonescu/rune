@@ -1,0 +1,162 @@
+{% extends "auth/admin.base.html.j2" %}
+
+
+{% block appcontent %}
+  <span id="errorMessage"></span>
+  <table class="table {{ ui_table() }}" data-order='[[ 1, "asc" ]]' data-page-length='25'>
+    <thead class="thead-light">
+      <tr>
+        <th class="">{{ _('ID') }}</th>
+        <th class="">{{ _('Username') }}</th>
+        <!-- <th class="col-md-3">{{ _('Name') }}</th> -->
+        <!-- <th class="col-md-2">{{ _('Birthdate') }}</th> -->
+        <th class="">{{ _('Active') }}</th>
+        <th class="">{{ _('Password Change Required') }}</th>
+        <th class="">{{ _('Failed Logins') }}</th>
+        <th class="">{{ _('Type') }}</th>
+        <th class="">{{ _('Actions') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in userlist %}
+        <tr class="{{ 'table-danger' if not user.active }}">
+          <td class="loop-index">{{ user.id }}</td>
+          <th>
+            {{ user.username }}
+          </th>
+          <!-- <td>{{ user.name | d('') }}</td> -->
+          <!-- <td>{{ moment(user.birthdate).format('L') if user.birthdate }}</td> -->
+          <td>
+            {{ yn(user.active) }}
+          </td>
+          <td>
+            {{ yn(user.force_pwd_change) }}
+          </td>
+          <td>{{ user.failed_attempts }}</td>
+          <td>{{ user.type }}</td>
+          <td class="d-print-none loop-index">
+            {% include 'auth/admin.user.menu.html.j2' %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+{% if current_user.has_permission('AUTH_ADMIN-USER-DELETE') %}
+<!-- Delete User Modal -->
+<div class="modal fade" id="deleteUser" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="deleteUserLabel">{{ _('Delete User') }}</h4>
+      </div>
+      <div class="modal-body">
+        <p class="text-danger">
+          {{ _('Are you sure you want to delete the account for') }} <strong id="user"></strong>?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="deleteUserModalDont">{{_('Don\'t delete')}}</button>
+        <a class="btn btn-danger" href="#" id="deleteUserModalDo">{{_('Delete')}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+  {% if current_user.has_permission('AUTH_ADMIN-USER-DELETE') %}
+    $('#deleteUser').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget)
+      var user = button.data('user')
+      var uri = button.data('uri')
+      var modal = $(this)
+
+      modal.find('#user').text(user)
+      modal.find('#deleteUserModalDo').attr("href", uri)
+    })
+  {% endif %}
+</script>
+
+<script>
+  function sendDelete () {
+    let sourceElem=event.srcElement;
+
+    return fetch('/api/v1/auth/users/' + username + '/delete/', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+        // body: JSON.stringify(data)
+      })
+      .then(response => {
+        if (!response.ok) {throw response}
+
+        return response.json();
+      })
+      .then(json => {
+        document.getElementById("errorMessage").innerHTML = json.message;
+        sourceElem.closest("tr").remove();
+      })
+      .catch( error => {
+        error.json().then( errorMessage => {
+          document.getElementById("errorMessage").innerHTML = errorMessage.message;
+        })
+      });
+    }
+
+  function deleteUserWithConfirmation() {
+    let result=confirm("Are you sure you want to delete?");
+    let username = event.currentTarget.dataset.username;
+    sourceElem=event.srcElement;
+
+    if (result) {
+      return fetch(`/api/v1/auth/users/${username}/delete/`, {
+        method: 'delete'
+      })
+      .then(response => {
+        if (!response.ok) {throw response}
+
+        return response.json();
+      })
+      .then(json => {
+        document.getElementById("errorMessage").innerHTML = json.message;
+        sourceElem.closest("tr").remove();
+      })
+      .catch( error => {
+        error.json().then( errorMessage => {
+          document.getElementById("errorMessage").innerHTML = errorMessage.message;
+        })
+      });
+    }
+  }
+</script>
+
+<!-- <script>
+  // $(document).ready(function() {
+  //   if ( $.fn.dataTable.isDataTable( '.dataTable' ) ) {
+  //     table = $('.dataTable').DataTable(
+  //       order: [[ 5, "desc" ]]
+  //     );
+  //   } else {
+  //     table = $('.dataTable').DataTable( {
+  //       order: [[ 5, "desc" ]]
+  //     } );
+  //   }
+  // } );
+
+  $(document).ready(function() {
+    $('.dataTable').DataTable( {
+      destroy: true,
+      order: [[ 1, "asc" ]],
+      searching: true,
+      // paging: false
+    } );
+  } );
+</script> -->
+{% endblock %}

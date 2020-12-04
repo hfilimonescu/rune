@@ -1,0 +1,9 @@
+recursive-exclude tests *
+
+recursive-include rune*/static *
+recursive-include rune*/templates *.html
+recursive-include rune*/templates *.j2
+
+include README.md
+
+graft rune/translations

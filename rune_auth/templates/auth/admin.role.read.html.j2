@@ -1,0 +1,24 @@
+{% extends "auth/admin.base.html.j2" %}
+
+{% block appcontent -%}
+  <div class="row">
+    <div class="col-md-5">
+      {% for user in role.users %}
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" disabled checked> {{ user.name }}
+          </label>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="col-md-7">
+      {% for permission in role.permissions %}
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" disabled checked> {{ permission.name }}
+          </label>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{%- endblock %}

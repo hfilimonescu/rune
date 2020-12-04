@@ -1,0 +1,67 @@
+{% extends "auth/admin.base.html.j2" %}
+
+
+{% block appcontent %}
+  <div x-data="users()" x-init="userList()">
+    <template x-if="users">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th class="">{{ _('ID') }}</th>
+            <th class="">{{ _('Username') }}</th>
+            <th class="">{{ _('Active') }}</th>
+            <th class="">{{ _('Password Change Required') }}</th>
+            <th class="">{{ _('Failed Logins') }}</th>
+            <th class="">{{ _('Type') }}</th>
+            <th class="d-print-none loop-index">{{ _('Actions') }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template x-for="user in users" :key="user.id">
+            <tr :class="{ 'table-warning': !user.active }">
+              <td x-text="user.id"></td>
+              <td x-text="user.username"></td>
+              <td x-text="user.active"></td>
+              <td x-text="user.force_pwd_change"></td>
+              <td x-text="user.failed_attempts"></td>
+              <td x-text="user.type"></td>
+              <td class="d-print-none loop-index btn-group-sm">
+                <template x-if="!user.is_admin">
+                  <a @click="deleteUser()"
+                     x-ref="user.username"
+                     class="btn btn-danger">Delete</a>
+                </template>
+              </td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </template>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+  function users() {
+    return {
+      {# user: null, #}
+      users: [],
+
+      userList: async function() {
+        const response = await fetch(`/api/v1/auth/users/`);
+        const data = await response.json();
+
+        this.users = data;
+      },
+      deleteUser:async function() {
+        {# this.user=e #}
+        console.log($refs)
+        const response=await fetch(`/api/v1/auth/users/${user.username}/delete/`,
+          { metod:'DELETE' }
+        )
+      }
+    }
+  }
+</script>
+{% endblock %}

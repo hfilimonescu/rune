@@ -1,0 +1,41 @@
+{% extends "main/admin.base.html.j2" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block appcontent %}
+  <table class="{{ ui_table() }}">
+    <thead>
+      <tr>
+        <th></th>
+        <th>{{ _('Title') }}</th>
+        <th class="loop-index">{{ _('Start Date') }}</th>
+        <th class="loop-index">{{ _('End Date') }}</th>
+        <th>{{ _('Locale') }}</th>
+        <th>{{ _('Author') }}</th>
+        <th class="d-print-none">{{ _('Actions') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for message in messages %}
+        <tr class="text-{{- 'danger' if message.expired }}">
+          <td class="loop-index">{{ fa('eye') if message.visible else fa('eye-slash') }}</td>
+          <td>{{ message.body.splitlines()[0].replace('#', '', 5) }}</td>
+          {#
+            splitlines()[0] -> read only the first splitline of the message
+            replace('#', '', 5) -> remove hashtags since it will occur in the title
+          #}
+          <td class="loop-index">{{ moment(message.start_date).format() }}</td>
+          <td class="loop-index">{{ moment(message.end_date).format() }}</td>
+          <td class="loop-index">
+            {{ kbd(message.locale) }}
+            {{ languages[message.locale] }}
+          </td>
+          <td class="loop-index">{{ message.author.name or message.author.username }}</td>
+          <td class="d-print-none loop-index">
+            {% include "main/admin.message.menu.html.j2" %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

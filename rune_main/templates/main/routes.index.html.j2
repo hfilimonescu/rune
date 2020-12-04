@@ -1,0 +1,22 @@
+{% extends "main/routes.base.html.j2" %}
+
+
+{% block appcontent %}
+  {% if messages %}
+    {% for message in messages | sort(attribute='start_date') %}
+      {{ card(text=message.body_html,
+              footer=message.author.name or message.author.username,
+              design='light'
+         )
+      }}
+    {% endfor %}
+  {% endif %}
+
+  <div class="card w-auto p-2 mt-2 text-center">
+    {% trans number=(messages | count) -%}
+      You have {{ number }} message.
+    {%- pluralize -%}
+      You have {{ number }} messages.
+    {%- endtrans %}
+  </div>
+{% endblock %}

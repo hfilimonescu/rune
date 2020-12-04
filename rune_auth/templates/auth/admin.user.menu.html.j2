@@ -1,0 +1,24 @@
+<div class="btn-group-sm">
+  {% if current_menu.active_item.children %}
+    {% for item in current_menu.active_item.children %}
+      {% if item.itemmenu is defined and item.itemmenu() and not user.is_admin %}
+        {{  btn_a(text=item.text,
+                  icon=item.icon,
+                  type=item.type,
+                  url=url_for(item._endpoint,
+                              username=user.username)) }}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {{  btn_m(type='danger',
+            icon='trash',
+            text=_('Delete'),
+            target="#deleteUser",
+            **{ 'data-uri':url_for('admin.auth_user_delete',
+                                    username=user.username),
+                'data-user':user.name or user.username })
+      if current_user.has_permission('AUTH_ADMIN-USER-DELETE')
+      and not user.is_admin
+      and current_user.username != user.username }}
+</div>

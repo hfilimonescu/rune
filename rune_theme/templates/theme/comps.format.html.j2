@@ -1,0 +1,23 @@
+{% from 'theme/comps.cards.html.j2' import card %}
+{% from 'theme/comps.text.html.j2' import badge %}
+{% from 'theme/comps.icons.html.j2' import la %}
+
+{% macro yn(arg1) %}
+  {% if arg1 %}
+    {{ badge(_('Yes'), 'success') }}
+  {% else %}
+    {{ badge(_('No'), 'danger') }}
+  {% endif %}
+{% endmacro %}
+
+{% macro panel(huge=None, links=[], url=None, icon=None, type=None) %}
+  {% set design = design or type %}
+  {{ card(title=huge, subtitle=None, text=None, links=links, url=url, icon=icon, design=design, width=None, footer=None) }}
+{% endmacro %}
+
+{% macro field(title=None, value=None) %}
+  <div class="row">
+    <div class="col-3 font-weight-bold">{{ title }}</div>
+    <div class="col-9">{{ value or la('times-circle')}}</div>
+  </div>
+{% endmacro %}

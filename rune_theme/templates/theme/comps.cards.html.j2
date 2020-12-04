@@ -1,0 +1,96 @@
+{% from 'theme/comps.buttons.html.j2' import btn_a %}
+{% from 'theme/comps.icons.html.j2' import la %}
+
+{% macro card(title=None,
+              subtitle=None,
+              text=None,
+              url=None,
+              links=[],
+              list=[],
+              design='default',
+              icon=None,
+              width=None,
+              header=None,
+              footer=None) %}
+
+{% set colors = {'default': 'text-dark border-dark',
+                 'primary': 'text-white bg-primary',
+                 'secondary': 'text-white bg-secondary',
+                 'success': 'text-white bg-success',
+                 'danger': 'text-white bg-danger',
+                 'warning': 'text-white bg-warning',
+                 'info': 'text-white bg-info',
+                 'light': 'text-dark bg-light',
+                 'dark': 'text-white bg-dark'} %}
+
+{% set sizes = {'25' : '25',
+                '50' : '50',
+                '75' : '75',
+                '100' : '100',
+                'auto' : 'auto'} %}
+
+
+<div class="card {{ colors.get(design) }} w-{{- sizes.get(width, 'auto') }} mt-2">
+    {% if header %}
+    <div class="card-header">
+        {{ header }}
+    </div>
+    {% endif %}
+    {% if url %}
+        <a href="{{ url_for(url) or '#' }}" class="card-link {{ colors.get(design) }}">
+    {% endif %}
+        {% if title or subtitle or text or icon %}
+            <div class="card-body">
+                {% if title %}
+                <h5 class="card-title text-center">{{ title }}</h5>
+                {% endif %}
+
+                {% if subtitle %}
+                <h6 class="card-subtitle mb-2 text-muted">{{ subtitle }}</h6>
+                {% endif %}
+
+                {% if text %}
+                <p class="card-text">{{ text }}</p>
+                {% endif %}
+
+                {% if icon %}
+                <h2 class="text-center">{{ la(icon, ['fa-3x']) }}</h2>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if list %}
+        <ul class="list-group list-group-flush">
+            {% for item in list %}
+                <li class="list-group-item">
+                    {{ item }}
+                </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+    {% if url %}
+        </a>
+    {% endif %}
+
+    {% if links %}
+    <ul class="list-group list-group-flush">
+        {% for link, url in links %}
+        <a href="{{ url_for(url) if url else '#'}}" class="card-link">
+            <li class="list-group-item">
+                {{ link }}
+            </li>
+        </a>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if footer %}
+    <div class="card-footer">
+        {{ footer }}
+    </div>
+    {% endif %}
+</div>
+
+
+{% endmacro %}

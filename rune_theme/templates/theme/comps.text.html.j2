@@ -1,0 +1,59 @@
+{% from 'theme/comps.icons.html.j2' import la %}
+
+
+{% macro b(text) -%}
+  <strong>{{- text -}}</strong>
+{%- endmacro %}
+
+{% macro i(text) -%}
+  <i>{{- text -}}</i>
+{%- endmacro %}
+
+{% macro s(text) -%}
+  <small>{{- text -}}</small>
+{%- endmacro %}
+
+{% macro h1(text) -%}
+  <h1>{{- text -}}</h1>
+{%- endmacro %}
+
+{% macro h2(text) -%}
+  <h2>{{- text -}}</h2>
+{%- endmacro %}
+
+{% macro h3(text) -%}
+  <h3>{{- text -}}</h3>
+{%- endmacro %}
+
+{% macro h4(text) -%}
+  <h4>{{- text -}}</h4>
+{%- endmacro %}
+
+{% macro label(text, type='default') %}
+  {{ badge(text, type) }}
+{% endmacro %}
+
+{% macro badge(text, design='secondary') %}
+  <span class="badge badge-{{- design if not config['APP_UI_MONOCHROME'] else 'secondary' }}">
+    {{ text }}
+  </span>
+{% endmacro %}
+
+{% macro kbd(text=None) %}
+  {% if text %}
+    <kbd>{{ text }}</kbd>
+  {% endif %}
+{% endmacro %}
+
+
+{% macro header(text, small, icon=None) %}
+  <div class="pb-1 mt-2 mb-3 border-bottom h4">
+    {% if icon %}
+      {{ la(icon) }}
+    {% endif %}
+    {{- text -}}
+    {% if small %}
+      <small>{{ small }}</small>
+    {% endif %}
+  </div>
+{% endmacro %}

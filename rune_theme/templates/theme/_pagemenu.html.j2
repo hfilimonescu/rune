@@ -1,0 +1,20 @@
+{# Create Back button in the Pagemenu #}
+{% if current_menu.active_item.parent._endpoint %}
+  {{ btn_a(current_menu.active_item.parent.text,
+           url=current_menu.active_item.parent.url,
+           design='light',
+           icon='angle-left',
+           size='sm') }}
+{% endif %}
+
+
+{# Create Pagemenu from the children of the current item. #}
+{% for child in current_menu.active_item.children %}
+  {% if child.pagemenu is defined and child.pagemenu() %}
+    {{ btn_a(child.text,
+            url=child.url,
+            design='light',
+            icon=child.icon,
+            size='sm') }}
+  {% endif %}
+{% endfor %}

@@ -1,0 +1,11 @@
+{% extends "main/admin.base.html.j2" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block appcontent %}
+  {{ wtf.quick_form(form,
+                    extra_classes="",
+                    button_map={'submit': 'primary btn-block'},
+                    form_type='horizontal',
+                    horizontal_columns=('lg', 3, 5),
+                    novalidate='novalidate') }}
+{% endblock %}

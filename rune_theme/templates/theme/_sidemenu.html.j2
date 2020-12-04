@@ -1,0 +1,34 @@
+{% from 'theme/comps.buttons.html.j2' import link %}
+
+{% for parent in current_menu.children recursive %}
+  {% if parent.active and parent.children and parent.has_visible_child() %}
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="list-group list-group-flush">
+        <div class="sidebar-nav">
+          <ul class="metismenu" id="side-mm">
+            {% for item in current_menu.submenu(parent.name).children recursive %}
+              {%- if item.visible -%}
+                {% set extra_classes = [] %}
+
+                {% do extra_classes.append('has-arrow') if item.has_visible_child() %}
+
+                <li class="{{ 'mm-active' if item.active }}">
+                  {{ link(item.text,
+                          url='#' if item.has_visible_child() else item.url,
+                          icon=item.icon or None,
+                          extra_classes=extra_classes) }}
+
+                  {% if item.has_visible_child() -%}
+                    <ul class="mm-collapse">
+                      {{ loop(item.children) }}
+                    </ul>
+                  {%- endif %}
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}

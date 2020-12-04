@@ -1,0 +1,585 @@
+# Romanian translations for Rune.
+# Copyright (C) 2020 Rune Team
+# This file is distributed under the same license as the Rune project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Rune 0.1.0\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-12-03 14:00+0100\n"
+"PO-Revision-Date: 2020-12-03 11:23+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ro\n"
+"Language-Team: ro <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100"
+" < 20)) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.0\n"
+
+#: rune_admin/routes.py:13
+msgid "Admin"
+msgstr ""
+
+#: rune_main/admin.py:21 rune_main/routes.py:12
+msgid "Messages"
+msgstr ""
+
+#: rune_main/admin.py:41
+msgid "Create Message"
+msgstr ""
+
+#: rune_main/admin.py:57
+msgid "Message created successfully."
+msgstr ""
+
+#: rune_auth/admin.py:112 rune_auth/admin.py:306
+#: rune_auth/templates/auth/routes.preference.menu.html.j2:16
+#: rune_auth/templates/auth/routes.preferences.html.j2:40 rune_main/admin.py:67
+msgid "Edit"
+msgstr ""
+
+#: rune_main/admin.py:83
+msgid "System Message updated sucessfuly"
+msgstr ""
+
+#: rune_auth/admin.py:342
+#: rune_auth/templates/auth/admin.user.list_old.html.j2:62
+#: rune_auth/templates/auth/admin.user.menu.html.j2:16 rune_main/admin.py:92
+msgid "Delete"
+msgstr ""
+
+#: rune_basis/admin.py:153 rune_main/admin.py:110
+msgid "Clean"
+msgstr ""
+
+#: rune_main/admin.py:124
+#, python-format
+msgid "%(counter)s messages have been removed."
+msgstr ""
+
+#: rune_auth/forms.py:121 rune_main/forms.py:34
+msgid "Language"
+msgstr ""
+
+#: rune_main/forms.py:39
+msgid "Message"
+msgstr ""
+
+#: rune_main/forms.py:47 rune_main/templates/main/admin.message.list.html.j2:11
+msgid "Start Date"
+msgstr ""
+
+#: rune_main/forms.py:52 rune_main/templates/main/admin.message.list.html.j2:12
+msgid "End Date"
+msgstr ""
+
+#: rune_auth/forms.py:85 rune_auth/forms.py:130 rune_auth/forms.py:139
+#: rune_auth/forms.py:173 rune_main/forms.py:56
+msgid "Save"
+msgstr ""
+
+#: rune_main/forms.py:62
+#, python-format
+msgid "End date %(end)s is smaller than the start date %(start)s."
+msgstr ""
+
+#: rune_main/routes.py:20 rune_theme/templates/theme/_topmenu.html.j2:34
+msgid "About Rune"
+msgstr ""
+
+#: rune_main/templates/main/admin.message.list.html.j2:10
+msgid "Title"
+msgstr ""
+
+#: rune_main/templates/main/admin.message.list.html.j2:13
+msgid "Locale"
+msgstr ""
+
+#: rune_main/templates/main/admin.message.list.html.j2:14
+msgid "Author"
+msgstr ""
+
+#: rune_auth/templates/auth/admin.role.list.html.j2:15
+#: rune_auth/templates/auth/admin.user.list.html.j2:16
+#: rune_auth/templates/auth/admin.user.list_old.html.j2:17
+#: rune_auth/templates/auth/routes.preferences.html.j2:11
+#: rune_main/templates/main/admin.message.list.html.j2:15
+msgid "Actions"
+msgstr ""
+
+#: rune_main/templates/main/routes.index.html.j2:16
+#, python-format
+msgid "You have %(number)s message."
+msgid_plural "You have %(number)s messages."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: rune_auth/__init__.py:40
+msgid "Your account is not active!"
+msgstr ""
+
+#: rune_auth/admin.py:24
+msgid "Authentication"
+msgstr ""
+
+#: rune_auth/admin.py:37 rune_auth/admin.py:368
+#: rune_auth/templates/auth/admin.role.list.html.j2:14
+msgid "Users"
+msgstr ""
+
+#: rune_auth/admin.py:57
+msgid "Create User"
+msgstr ""
+
+#: rune_auth/admin.py:80
+#, python-format
+msgid "User %(name)s has been created."
+msgstr ""
+
+#: rune_auth/admin.py:91 rune_auth/admin.py:289
+msgid "View"
+msgstr ""
+
+#: rune_auth/admin.py:123 rune_auth/admin.py:167 rune_auth/admin.py:197
+msgid "You are not allowed to edit the DDIC user."
+msgstr ""
+
+#: rune_auth/admin.py:127
+#, python-format
+msgid "Username and Email for %(username)s already modified."
+msgstr ""
+
+#: rune_auth/admin.py:140
+#, python-format
+msgid "User %(name)s has been updated."
+msgstr ""
+
+#: rune_auth/admin.py:156 rune_auth/admin.py:236
+#: rune_auth/templates/auth/admin.permission.list.html.j2:10
+msgid "Roles"
+msgstr ""
+
+#: rune_auth/admin.py:177
+#, python-format
+msgid "Roles for %(name)s have been updated."
+msgstr ""
+
+#: rune_auth/admin.py:191
+msgid "You are not allowed to delete your own user!"
+msgstr ""
+
+#: rune_auth/admin.py:206
+#, python-format
+msgid "User %(username)s does not exist."
+msgstr ""
+
+#: rune_auth/admin.py:215
+#, python-format
+msgid "User %(name)s has been deleted."
+msgstr ""
+
+#: rune_auth/admin.py:227
+#, python-format
+msgid "Failed login attepts for user %(name)s has been reset"
+msgstr ""
+
+#: rune_auth/admin.py:255
+msgid "Create Role"
+msgstr ""
+
+#: rune_auth/admin.py:270
+#, python-format
+msgid "Role %(name)s has been created."
+msgstr ""
+
+#: rune_auth/admin.py:321
+#, python-format
+msgid "Role %(name)s was updated sucessfuly."
+msgstr ""
+
+#: rune_auth/admin.py:323
+#, python-format
+msgid "Role %(name)s could not be updated."
+msgstr ""
+
+#: rune_auth/admin.py:354
+msgid "Role {name} has users assigned. You cannot delete it."
+msgstr ""
+
+#: rune_auth/admin.py:358
+msgid "Role {name} has been deleted."
+msgstr ""
+
+#: rune_auth/admin.py:387
+msgid "Roles updated for the selected users."
+msgstr ""
+
+#: rune_auth/admin.py:400
+msgid "Permissions"
+msgstr ""
+
+#: rune_auth/decorators.py:22
+#, python-format
+msgid "Missing permission %(permission)s"
+msgstr ""
+
+#: rune_auth/emails.py:10
+msgid "Your New Account"
+msgstr ""
+
+#: rune_auth/emails.py:21
+#, python-format
+msgid "Email for %(name)s has changed."
+msgstr ""
+
+#: rune_auth/emails.py:36
+msgid "Password Reset"
+msgstr ""
+
+#: rune_auth/forms.py:16 rune_auth/forms.py:90
+#: rune_auth/templates/auth/admin.user.list.html.j2:11
+#: rune_auth/templates/auth/admin.user.list_old.html.j2:10
+msgid "Username"
+msgstr ""
+
+#: rune_auth/forms.py:21
+msgid "Password"
+msgstr ""
+
+#: rune_auth/forms.py:25
+msgid "Remember me"
+msgstr ""
+
+#: rune_auth/forms.py:28 rune_auth/routes.py:37
+#: rune_auth/templates/auth/routes.login.html.j2:21
+#: rune_auth/templates/auth/routes.logout.html.j2:14
+#: rune_auth/templates/auth/routes.logout.html.j2:20
+msgid "Login"
+msgstr ""
+
+#: rune_auth/forms.py:33
+msgid "Old password"
+msgstr ""
+
+#: rune_auth/forms.py:38
+msgid "New password"
+msgstr ""
+
+#: rune_auth/forms.py:43
+msgid "Passwords must match"
+msgstr ""
+
+#: rune_auth/forms.py:47
+msgid "Confirm new password"
+msgstr ""
+
+#: rune_auth/forms.py:53
+msgid "Update Password"
+msgstr ""
+
+#: rune_auth/forms.py:58 rune_auth/forms.py:102
+msgid "Email"
+msgstr ""
+
+#: rune_auth/forms.py:66
+msgid "Reset Password"
+msgstr ""
+
+#: rune_auth/forms.py:71
+msgid "Key"
+msgstr ""
+
+#: rune_auth/forms.py:79
+msgid "Value"
+msgstr ""
+
+#: rune_auth/forms.py:94
+msgid "Full Name"
+msgstr ""
+
+#: rune_auth/forms.py:110
+#: rune_auth/templates/auth/admin.user.list_old.html.j2:12
+msgid "Birthdate"
+msgstr ""
+
+#: rune_auth/forms.py:114
+msgid "Location"
+msgstr ""
+
+#: rune_auth/forms.py:125
+msgid "Active User"
+msgstr ""
+
+#: rune_auth/forms.py:135
+#, python-format
+msgid "Email %(mail)s is already registered."
+msgstr ""
+
+#: rune_auth/forms.py:143
+msgid "Assign Roles"
+msgstr ""
+
+#: rune_auth/forms.py:148
+#: rune_auth/templates/auth/admin.permission.list.html.j2:9
+#: rune_auth/templates/auth/admin.role.list.html.j2:12
+#: rune_auth/templates/auth/admin.user.list_old.html.j2:11
+#: rune_auth/templates/auth/routes.preferences.html.j2:8
+msgid "Name"
+msgstr ""
+
+#: rune_auth/forms.py:155
+msgid "Role names are allowed only letters, numbers, or underscores"
+msgstr ""
+
+#: rune_auth/forms.py:161 rune_auth/templates/auth/admin.role.list.html.j2:13
+msgid "Description"
+msgstr ""
+
+#: rune_auth/forms.py:168
+msgid "Role descriptions are allowed only letters, numbers, or underscores"
+msgstr ""
+
+#: rune_auth/forms.py:180
+msgid "Please use a different name."
+msgstr ""
+
+#: rune_auth/routes.py:44
+#, python-format
+msgid "You were already authenticated as %(name)s."
+msgstr ""
+
+#: rune_auth/routes.py:62 rune_auth/routes.py:68
+msgid "Invalid username or password."
+msgstr ""
+
+#: rune_auth/routes.py:72
+#, python-format
+msgid "You have %(num)d failed login attempt."
+msgid_plural "You have %(num)d failed login attempts."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: rune_auth/routes.py:94
+msgid "Logout"
+msgstr ""
+
+#: rune_auth/routes.py:106
+msgid "You have been logged out."
+msgstr ""
+
+#: rune_auth/routes.py:117
+msgid "Please provide a valid email."
+msgstr ""
+
+#: rune_auth/routes.py:120
+msgid "Your account is not active. Please contact the administrator."
+msgstr ""
+
+#: rune_auth/routes.py:124
+msgid "You have already resetted your password!"
+msgstr ""
+
+#: rune_auth/routes.py:137
+msgid "Your password has been reset. Check your Email account."
+msgstr ""
+
+#: rune_auth/routes.py:149
+msgid "Change Password"
+msgstr ""
+
+#: rune_auth/routes.py:161
+msgid "Your password has been updated."
+msgstr ""
+
+#: rune_auth/routes.py:164
+msgid "Invalid password."
+msgstr ""
+
+#: rune_auth/routes.py:172
+msgid "My Profile"
+msgstr ""
+
+#: rune_auth/routes.py:185
+msgid "Preferences"
+msgstr ""
+
+#: rune_auth/routes.py:205
+msgid "Add Preference"
+msgstr ""
+
+#: rune_auth/routes.py:234
+#, python-format
+msgid "Preference %(name)s is set to %(value)s"
+msgstr ""
+
+#: rune_auth/routes.py:242
+#, python-format
+msgid "%(field)s: %(msg)s"
+msgstr ""
+
+#: rune_auth/routes.py:255
+msgid "Reload Preferences"
+msgstr ""
+
+#: rune_auth/routes.py:269
+#, python-format
+msgid "Preferences for %(name)s have been reloaded."
+msgstr ""
+
+#: rune_auth/templates/auth/admin.role.list.html.j2:11
+msgid "Group"
+msgstr ""
+
+#: rune_auth/templates/auth/admin.role.list.html.j2:28
+#, python-format
+msgid "[Total %(total)s]"
+msgstr ""
+
+#: rune_auth/templates/auth/admin.user.list.html.j2:10
+#: rune_auth/templates/auth/admin.user.list_old.html.j2:9
+msgid "ID"
+msgstr ""
+
+#: rune_auth/templates/auth/admin.user.list.html.j2:12
+#: rune_auth/templates/auth/admin.user.list_old.html.j2:13
+msgid "Active"
+msgstr ""
+
+#: rune_auth/templates/auth/admin.user.list.html.j2:13
+#: rune_auth/templates/auth/admin.user.list_old.html.j2:14
+msgid "Password Change Required"
+msgstr ""
+
+#: rune_auth/templates/auth/admin.user.list.html.j2:14
+#: rune_auth/templates/auth/admin.user.list_old.html.j2:15
+msgid "Failed Logins"
+msgstr ""
+
+#: rune_auth/templates/auth/admin.user.list.html.j2:15
+#: rune_auth/templates/auth/admin.user.list_old.html.j2:16
+msgid "Type"
+msgstr ""
+
+#: rune_auth/templates/auth/admin.user.list_old.html.j2:53
+msgid "Delete User"
+msgstr ""
+
+#: rune_auth/templates/auth/admin.user.list_old.html.j2:57
+msgid "Are you sure you want to delete the account for"
+msgstr ""
+
+#: rune_auth/templates/auth/admin.user.list_old.html.j2:61
+msgid "Don't delete"
+msgstr ""
+
+#: rune_auth/templates/auth/email.user_new.html.j2:9
+#, python-format
+msgid ""
+"Visit <a href=\"%(link)s\">%(text)s</a> and change your password as soon "
+"as possible."
+msgstr ""
+
+#: rune_auth/templates/auth/email.user_new.txt.j2:7
+#, python-format
+msgid ""
+"\n"
+"  Visit <a href=\"%(link)s\">%(text)s</a> and change it as soon as "
+"possible.\n"
+msgstr ""
+
+#: rune_auth/templates/auth/routes.login.html.j2:30
+#: rune_auth/templates/auth/routes.logout.html.j2:29
+msgid "I have forgoten my password."
+msgstr ""
+
+#: rune_auth/templates/auth/routes.login.html.j2:32
+#: rune_auth/templates/auth/routes.logout.html.j2:31
+msgid "Reset my password"
+msgstr ""
+
+#: rune_auth/templates/auth/routes.logout.html.j2:25
+msgid "Certificate Login"
+msgstr ""
+
+#: rune_auth/templates/auth/routes.preferences.html.j2:9
+msgid "DB Value"
+msgstr ""
+
+#: rune_auth/templates/auth/routes.preferences.html.j2:10
+msgid "Session Value"
+msgstr ""
+
+#: rune_auth/templates/auth/routes.preferences.html.j2:55
+msgid "Create Preference"
+msgstr ""
+
+#: rune_auth/templates/auth/routes.reset_password.html.j2:9
+msgid "Reset My Password"
+msgstr ""
+
+#: rune_theme/templates/theme/base.html.j2:70
+msgid "Page Title"
+msgstr ""
+
+#: rune_theme/templates/theme/comps.dropdowns.html.j2:19
+msgid "Dropdown"
+msgstr ""
+
+#: rune_theme/templates/theme/comps.format.html.j2:7
+#: rune_theme/templates/theme/comps.tables.html.j2:11
+msgid "Yes"
+msgstr ""
+
+#: rune_theme/templates/theme/comps.format.html.j2:9
+#: rune_theme/templates/theme/comps.tables.html.j2:13
+msgid "No"
+msgstr ""
+
+#: rune_basis/admin.py:89
+msgid "Basis"
+msgstr ""
+
+#: rune_basis/admin.py:103
+msgid "Rune Apps"
+msgstr ""
+
+#: rune_basis/admin.py:197
+#, python-format
+msgid "Deleted %(count)s orphaned permissions"
+msgstr ""
+
+#: rune_basis/admin.py:207
+msgid "Versions"
+msgstr ""
+
+#: rune_basis/forms.py:8 rune_basis/templates/basis/admin.apps.list.html.j2:57
+msgid "Install"
+msgstr ""
+
+#: rune_basis/templates/basis/admin.apps.list.html.j2:33
+msgid "Module"
+msgstr ""
+
+#: rune_basis/templates/basis/admin.apps.list.html.j2:34
+#: rune_basis/templates/basis/admin.packages.list.html.j2:8
+msgid "Version"
+msgstr ""
+
+#: rune_basis/templates/basis/admin.apps.list.html.j2:35
+#: rune_basis/templates/basis/admin.packages.list.html.j2:10
+msgid "Details"
+msgstr ""
+
+#: rune_basis/templates/basis/admin.apps.list.html.j2:60
+msgid "Uninstall"
+msgstr ""
+
+#: rune_basis/templates/basis/admin.packages.list.html.j2:9
+msgid "Package"
+msgstr ""
+

@@ -1,0 +1,14 @@
+<div class="btn-group-sm">
+  {% if current_menu.active_item.children %}
+    {% for item in current_menu.active_item.children %}
+      {% if item.itemmenu is defined and item.itemmenu() %}
+        {{  btn_a(text=item.text,
+                  icon=item.icon,
+                  design=item.type,
+                  url=url_for(item._endpoint,
+                              name=role.name))
+            if not role.system }}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>

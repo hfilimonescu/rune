@@ -1,0 +1,36 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% from "sb2/macro.flashed.html.j2" import messages_ng %}
+
+
+{% block content -%}
+<div class="row">
+  <div class="col-md-3 col-md-offset-4">
+    <h1 class="page-header">
+      <img src="{{ url_for('static', filename='bec_256.png') }}"
+           alt="BEC Logo"
+           style="display: block; margin: 0 auto; padding-bottom: 15px;"
+           height="128px">
+      {{ _('Login') }}
+    </h1>
+    {{ messages_ng(container=False, dismissible=True) }}
+    <p></p>
+    <a class="btn btn-primary btn-block"
+       href="{{ url_for('auth.login') }}">
+      {{ _('Login') }}
+    </a>
+    <p></p>
+    <a class="btn btn-primary btn-block"
+       href="{{ url_for('auth.cert_login') }}">
+      {{ _('Certificate Login') }}
+    </a>
+    <p>&nbsp;</p>
+    <div class="well">
+      {{ _('I have forgoten my password.') }}
+      <a href="{{ url_for('auth.reset_password') }}">
+        {{ _('Reset my password') }}.
+      </a>
+    </div>
+  </div>
+</div>
+{%- endblock %}

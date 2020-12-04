@@ -1,0 +1,184 @@
+{% extends 'bootstrap/base.html' %}
+
+{% from 'bootstrap/utils.html' import flashed_messages %}
+
+{% from 'theme/comps.buttons.html.j2' import btn_a, btn_m, link %}
+{% from 'theme/comps.modals.html.j2' import modal %}
+{% from 'theme/comps.cards.html.j2' import card %}
+{% from 'theme/comps.dropdowns.html.j2' import dropdown, separator %}
+{% from 'theme/comps.tables.html.j2' import ui_table, yn, kbd, panel, field %}
+{% from 'theme/comps.format.html.j2' import yn, kbd, panel, field %}
+{% from 'theme/comps.text.html.j2' import b, i, s, kbd, badge, label, header %}
+{% from 'theme/comps.icons.html.j2' import fa, la %}
+
+
+{% block html_attribs %}
+  lang="{{ g.locale }}"
+{% endblock html_attribs %}
+
+{% block title %}
+  {{ config['RUNE_NAME'] }}
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+
+{# Simple Sidebar #}
+<link href="{{ url_for('theme.static', filename='vendor/simple-sidebar/simple-sidebar.css') }}" rel="stylesheet">
+
+{# MetisMenu #}
+<link href="{{ url_for('theme.static', filename='vendor/metismenu/metisMenu.min.css') }}" rel="stylesheet">
+<link href="{{ url_for('theme.static', filename='vendor/metismenu/mm-vertical.css') }}" rel="stylesheet">
+
+{# DataTables #}
+<link href="{{ url_for('theme.static', filename='vendor/datatables/datatables.min.css') }}" rel="stylesheet">
+
+{# Line Awesome Icons #}
+<link rel="stylesheet" href="//maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+
+{# Custom App CSS #}
+<link href="{{ url_for('theme.static', filename='app.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block navbar %}
+  {# Topbar #}
+    {% include 'theme/_topmenu.html.j2' %}
+  {# /Topbar #}
+{% endblock  %}
+
+
+{% block content %}
+{# Wrapper #}
+<div class="d-flex" id="wrapper">
+
+  {# Sidebar #}
+  {% include 'theme/_sidemenu.html.j2' %}
+  {# /Sidebar #}
+
+  {# Page Content #}
+  <div id="page-content-wrapper">
+
+    <div class="container-fluid">
+      <div class="pagemenu border border-bottom border-top-0 rounded-bottom bg-light d-print-none">
+        {% block pagemenu %}
+          {% include 'theme/_pagemenu.html.j2' %}
+        {% endblock pagemenu %}
+      </div>
+
+      {% block pageheader %}
+        {{ header(current_menu.active_item.text or _('Page Title'),
+                  icon=current_menu.active_item.icon or None) }}
+      {% endblock %}
+
+      {% block flashed %}
+        {{ flashed_messages(container=False, dismissible=True) }}
+      {% endblock %}
+
+      {% block appcontent %}{% endblock %}
+    </div>
+  </div>
+  {# /Page Content #}
+
+</div>
+{# /#wrapper #}
+
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+
+  {{ pagedown.include_pagedown() }}
+
+  {# MetisMenu JS #}
+  <script src="{{ url_for('theme.static', filename='vendor/metismenu/metisMenu.min.js') }}"></script>
+
+  {# DataTables #}
+  <script src="{{ url_for('theme.static', filename='vendor/datatables/datatables.min.js') }}"></script>
+
+  <script>
+    $(function () {
+      $('#side-mm').metisMenu({
+        preventDefault: true,
+        activeClass: 'active'
+      });
+      {# $('.table').DataTable({
+        // dom: 'frtipB',
+        // buttons: [
+        //   'copy', 'excel', 'pdf', 'print'
+        // ]
+        // buttons: [{
+        //     extend: 'copy',
+        //     text: '<i class="fas fa-file"></i> Copy',
+        //     titleAttr: 'Copy',
+        //     className: 'btn btn-light btn-sm'
+        //   },
+        //   {
+        //     extend: 'csv',
+        //     text: '<i class="fa fa-files-o"></i> CSV',
+        //     titleAttr: 'CSV',
+        //     className: 'btn btn-light btn-sm',
+        //     exportOptions: {
+        //       columns: ':visible'
+        //     }
+        //   },
+        //   {
+        //     extend: 'excel',
+        //     text: '<i class="fa fa-files-o"></i> Excel',
+        //     titleAttr: 'Excel',
+        //     className: 'btn btn-light btn-sm',
+        //     exportOptions: {
+        //       columns: ':visible'
+        //     }
+        //   },
+        //   {
+        //     extend: 'pdf',
+        //     text: '<i class="fa fa-file-pdf-o"></i> PDF',
+        //     titleAttr: 'PDF',
+        //     className: 'btn btn-light btn-sm',
+        //     exportOptions: {
+        //       columns: ':visible'
+        //     }
+        //   },
+        //   {
+        //     extend: 'print',
+        //     text: '<i class="fa fa-print"></i> Print',
+        //     titleAttr: 'Print',
+        //     className: 'btn btn-light btn-sm',
+        //     exportOptions: {
+        //       columns: ':visible'
+        //     }
+        //   },
+        // ]
+      });
+      $('div.dataTables_filter input').focus(); #}
+    });
+    $(document).ready(function() {
+      $(".alert-dismissible").delay({{config.get('RUNE_THEME_ALERT_AUTOCLOSE', 4000)}}).slideUp(400, function() {
+        $(this).alert('close');
+      });
+    });
+  </script>
+
+  {# Flask_moment #}
+  {{ moment.include_moment() }}
+  {{ moment.locale(auto_detect=True) }}
+
+  {# OnDblClick on tags with data-url attributes open the attribute #}
+  <script type = "text/javascript">
+    {# document.querySelectorAll('[data-url]').ondblclick = function(e) {goToDetails()};
+
+    function goToDetails(e) {
+      window.location = e.data('url');
+    } #}
+
+    document.ondblclick = function (e) {
+      if (e.target.dataset['url']) {
+        window.location = e.target.dataset['url'];
+      }
+    }
+  </script>
+
+  {# AlpineJS #}
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.min.js" defer></script>
+{% endblock %}

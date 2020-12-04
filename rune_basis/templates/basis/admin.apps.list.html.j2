@@ -1,0 +1,73 @@
+{% extends 'admin.base.html.j2' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block appcontent %}
+
+{% if current_user.username != 'ddic' %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-danger">
+      <p class="h3 pb-5">STOP!</p>
+      <p>If you know what you are doing and are willing to break
+        the system please proceed. If not, return to your changing
+        other settings.</p>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<form action="" method="post">
+  {{ form.hidden_tag() }}
+  {{ wtf.form_errors(form, hiddens="only") }}
+
+  <table class="table table-hover table-sm">
+    <thead class="">
+      <tr>
+        {% if current_user.hp('BASIS_ADMIN-INSTALL')
+           or current_user.hp('BASIS_ADMIN-UNINSTALL') %}
+          <th class="loop-index">
+            <input type="checkbox" onClick="toggle(this, 'apps')" />
+          </th>
+        {% endif %}
+        <th class="loop-index">{{_('Module')}}</th>
+        <th class="loop-index">{{_('Version')}}</th>
+        <th>{{_('Details')}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for app in rune_apps %}
+      <tr>
+        {% if current_user.hp('BASIS_ADMIN-INSTALL')
+           or current_user.hp('BASIS_ADMIN-UNINSTALL') %}
+          <td>
+            {% if rune_apps[app]['installable'] %}
+              <input type="checkbox" name="apps" value="{{ app }}">
+            {% endif %}
+          </td>
+        {% endif %}
+        <td class="text-monospace font-weight-bold">{{ app }}</td>
+        <td>{{ label(rune_apps[app]['version'], 'dark' ) }}</td>
+        <td class="small">{{ rune_apps[app]['descr'] or '' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if current_user.hp('BASIS_ADMIN-INSTALL') %}
+  <input class="btn btn-primary" name="install" type="submit" value="{{ _('Install') }}">
+  {% endif %}
+  {% if current_user.hp('BASIS_ADMIN-UNINSTALL') %}
+  <input class="btn btn-danger" name="uninstall" type="submit" value="{{ _('Uninstall') }}">
+  {% endif %}
+</form>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script language="JavaScript">
+  function toggle(source, checkboxes_name) {
+    checkboxes = document.getElementsByName(checkboxes_name);
+    for (var i in checkboxes) checkboxes[i].checked = source.checked;
+  }
+</script>
+{% endblock scripts %}

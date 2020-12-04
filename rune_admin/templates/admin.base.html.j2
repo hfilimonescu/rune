@@ -1,0 +1,19 @@
+{% extends "base.html.j2" %}
+
+{% block appcontent %}
+  <div class="row row-cols-1 row-cols-md-{{ config['RUNE_ADMIN_CARDS_ROW'] }}">
+    {%- for item in current_menu.active_item.children -%}
+
+      {% if item.visible %}
+        <div class="col mb-2 mt-2">
+          {{ card(title=item.text,
+                  url=item._endpoint,
+                  icon=item.icon,
+                  design=item.design or config['RUNE_ADMIN_CARDS_DESIGN'],
+                 ) }}
+        </div>
+      {% endif %}
+
+    {%- endfor -%}
+  </div>
+{% endblock %}

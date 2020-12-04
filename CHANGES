@@ -1,0 +1,53 @@
+Rune Changelog
+==============
+
+
+Version 0.2.2.dev
+-------------
+
+Released on Montober 28th 2021
+
+-   
+
+
+Version 0.2.1
+-------------
+
+Released on December 3rd 2020
+
+-   Tests: Add factory test and default config tests (#1)
+-   Config add Rune keys
+-   Config import os
+-   Config Babel
+-   Config SQLALCHEMY_TRACK_MODIFICATIONS
+-   Add favicon.ico
+
+
+Version 0.2.0
+-------------
+
+Released on December 3rd 2020
+
+-   Update rune.__init__ to use all new packages
+-   Add translations `de` and `ro`
+-   Add hagalaz.png
+-   Update make-release
+-   Add rune.util
+-   Add rune.cli
+-   Add rune.database
+-   Add rune.config
+-   Add rune_theme
+-   Add rune_main
+-   Add rune_error
+-   Add rune_basis
+-   Add rune_auth
+-   Add rune_admin
+-   Update gitignore with Rune specific files
+
+
+Version 0.1.0
+-------------
+
+Released on December 3rd 2020
+
+-   Create basic package to release on PyPI
