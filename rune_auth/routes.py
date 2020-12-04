@@ -253,7 +253,7 @@ def preference_create():
     bp,
     '.auth.preference.reload',
     _('Reload Preferences'),
-    order=10,
+    order=20,
     icon='redo-alt',
     type='info',
     visible_when=lambda: False,

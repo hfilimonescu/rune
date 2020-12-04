@@ -10,10 +10,14 @@ from .bp import bp
 
 
 @bp.route('/')
-@register_menu(bp, '.admin', _('Admin'),
-               order=95,
-               icon='tools',
-               visible_when=lambda: cu.hp('MENU-ADMIN'))
+@register_menu(
+    bp,
+    '.admin',
+    _('Admin'),
+    icon='tools',
+    order=90,
+    visible_when=lambda: cu.hp('MENU-ADMIN'),
+)
 @permission_required('MENU-ADMIN')
 def main():
     """This will show cards of all RUNE Apps that have registered menus
