@@ -5,9 +5,15 @@
 {% block appcontent %}
 <ul class="text-monospace">
   {% for item in current_menu.children recursive %}
+    
     <li>
-      {{ item.order }} | {{ item.text }} | {{ item.url }} | {{ item.visible }} | 
-          {{ item.pagemenu() if item.pagemenu is defined else 'N/A' }}
+        {{ loop.depth }}
+      | {{ item.order }}
+      | {{ item.text }}
+      | {{ item.url }}
+      | {{ item.visible }}
+      | {{ item.pagemenu() if item.pagemenu is defined else 'N/A' }}
+      | {{ item.parent.name or 'N/P' }}
         <ul>
           {{ loop(item.children) }}
         </ul>
