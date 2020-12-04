@@ -6,7 +6,8 @@
 <ul class="text-monospace">
   {% for item in current_menu.children recursive %}
     <li>
-      {{ item.order }} | {{ item.text }} | {{ item.url }} | {{ item.visible }}
+      {{ item.order }} | {{ item.text }} | {{ item.url }} | {{ item.visible }} | 
+          {{ item.pagemenu() if item.pagemenu is defined else 'N/A' }}
         <ul>
           {{ loop(item.children) }}
         </ul>
