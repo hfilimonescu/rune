@@ -33,8 +33,8 @@
   {{ badge(text, type) }}
 {% endmacro %}
 
-{% macro badge(text, design='secondary') %}
-  <span class="badge badge-{{- design if not config['APP_UI_MONOCHROME'] else 'secondary' }}">
+{% macro badge(text, design='dark') %}
+  <span class="badge badge-{{- design if not config['APP_UI_MONOCHROME'] else 'dark' }}">
     {{ text }}
   </span>
 {% endmacro %}

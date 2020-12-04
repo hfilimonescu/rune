@@ -22,7 +22,7 @@
             {{ content | safe }}
           {% else %}
             {{ content | render_form(action=url_for(action) or '',
-                                     button_map={'submit': 'primary btn-block'},
+                                     button_map={'submit': 'dark btn-block'},
                                      form_type='basic',
                                      horizontal_columns=('lg', 4, 8)) }}
           {% endif %}

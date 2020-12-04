@@ -23,7 +23,7 @@
     {{ flashed_messages(container=False, dismissible=True) }}
 
     {{ form | render_form(extra_classes="",
-                          button_map={'submit': 'primary btn-block'}) }}
+                          button_map={'submit': 'dark btn-block'}) }}
 
     {% if config['RUNE_AUTH_LOGIN_FORGOTTEN'] %}
       <p class="pt-3">
