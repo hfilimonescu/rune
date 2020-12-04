@@ -2,7 +2,7 @@ from flask import json, render_template, request
 from werkzeug.exceptions import HTTPException
 
 
-__version__ = '0.3.0'
+__version__ = '0.3.1.dev'
 
 
 class Error:
