@@ -204,7 +204,7 @@ def preferences():
     '.auth.preference.create',
     _('Add Preference'),
     icon='plus-square',
-    order=20,
+    order=10,
     type='primary',
     visible_when=lambda: False,
     pagemenu=lambda: True)
@@ -253,7 +253,7 @@ def preference_create():
     bp,
     '.auth.preference.reload',
     _('Reload Preferences'),
-    order=20,
+    order=10,
     icon='redo-alt',
     type='info',
     visible_when=lambda: False,
