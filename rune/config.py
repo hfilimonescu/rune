@@ -11,9 +11,7 @@ class Config:
 
     RUNE_APPS = []
     RUNE_ADMINS = [
-        'rune@rhhr.ro',
-        'ddic@rhhr.ro',
-        'admin@rhhr.ro'
+        'rune@example.com',
     ]
     RUNE_DEFAULT_LOCALE = 'de'
     RUNE_LANGUAGES = [

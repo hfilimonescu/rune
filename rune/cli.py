@@ -57,7 +57,9 @@ RUNE_AUTH_LOGIN_FORGOTTEN = False
 RUNE_AUTH_LOGIN_REMEMBER = False
 
 
-# RUNE_ADMINS = ['rune@rune.ro']
+RUNE_ADMINS = [
+    'rune@example.com',
+]
 # RUNE_NAME = 'Rune'
 
 # BOOTSTRAP_SERVE_LOCAL = True

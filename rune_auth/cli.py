@@ -1,4 +1,5 @@
 import click
+from flask import current_app
 from flask.cli import with_appcontext
 
 
@@ -10,20 +11,27 @@ def auth():
 
 @auth.command()
 @with_appcontext
-def create_ddic():
-    """Create the DDIC user"""
-    print('Creating user DDIC...')
-
+def create_admins():
+    """Create the dedicated user"""
     from rune import db  # noqa
     from rune_auth.models import User  # noqa
 
-    ddic = User()
-    ddic.username = 'ddic'
-    ddic.name = 'Dedicated User'
-    ddic.email = 'ddic@rhhr.ro'
-    ddic.password = 'RUNE'
-    ddic.locale = 'en'
-    db.session.add(ddic)
-    db.session.commit()
+    admin_list = current_app.config.get('RUNE_ADMINS')
 
-    print('Created user DDIC.')
+    for admin in admin_list:
+        username = admin.split('@')[0]
+        if User.query.filter_by(email=admin).first():
+            click.secho(f'User {admin} already exists...', fg='yellow')
+        else:
+            click.secho(f'Creating user {admin}...', fg='cyan')
+            auser = User()
+            auser.email = admin
+            auser.username = username
+            auser.password = 'RUNE'
+            auser.name = username
+            auser.locale = 'en'
+            auser.force_pwd_change = True
+            db.session.add(auser)
+            click.secho(f'Created user {admin}.', fg='green')
+
+    db.session.commit()
