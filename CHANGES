@@ -2,12 +2,18 @@ Rune Changelog
 ==============
 
 
-Version 0.3.1.dev
+Version 0.3.1
 -------------
 
-Released on Montober 28th 2021
+Released on December 7th 2020
 
--   
+-   Readme Installation Instructions (#6)
+-   CLI Auth creates all accounts specified inn `RUNE_ADMINS` and forces pwd change (#5)
+-   New menu order (#4)
+-   Replace `secondary` with `dark` in buttons for better contrast
+-   Add Basis view menu structure and details
+-   Add celery_worker.py to rune
+-   Extend rune gitignore
 
 
 Version 0.3.0
