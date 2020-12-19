@@ -2,12 +2,12 @@ Rune Changelog
 ==============
 
 
-Version 0.3.2.dev
+Version 0.3.2
 -------------
 
-Released on Montober 28th 2021
+Released on December 20th 2020
 
--   
+-   Pin `Flask-BS4` version to `~=4.5`
 
 
 Version 0.3.1
