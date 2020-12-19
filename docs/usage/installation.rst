@@ -1,11 +1,11 @@
 Installation
 ============
 
-Create a virtualenv (optional)
-------------------------------
+Create a venv (optional)
+------------------------
 
-I prefere to use virtual environments to keep everything clean and tidy. 
-You can skip this step if you prefere it another way. You can also use 
+I prefer to use virtual environments to keep everything clean and tidy. 
+You can skip this step if you don't need it. You can also use 
 other packages to create your virtual environment.
 
 .. code-block:: bash
