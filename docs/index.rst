@@ -16,6 +16,7 @@ Welcome to Rune
    usage/quickstart
    usage/installation
    highlights
+   todos
 
 
 
