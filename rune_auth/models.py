@@ -56,7 +56,7 @@ role_permission = db.Table(
 
 class User(CRUDMixin, UserMixin, db.Model):
     __tablename__ = 'auth_users'
-    email = db.Column(db.String(64), unique=True, index=True)
+    email = db.Column(db.String(64), nullable=False, unique=True, index=True)
     name = db.Column(db.String(64))
     locale = db.Column(db.String(5), default='en')
     location = db.Column(db.String(64))
@@ -114,13 +114,8 @@ class User(CRUDMixin, UserMixin, db.Model):
 
     @property
     def permissions(self):
-        permissions = []
-        names = []
         for role in self._roles:
-            permissions += role.permissions
-        for permission in permissions:
-            names.append(permission.name)
-        return names
+            return [permission.name for permission in role.permissions]
 
     def has_permission(self, permission):
         if self.is_admin or permission.upper() in self.permissions:
