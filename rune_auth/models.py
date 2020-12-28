@@ -56,7 +56,7 @@ role_permission = db.Table(
 
 class User(CRUDMixin, UserMixin, db.Model):
     __tablename__ = 'auth_users'
-    email = db.Column(db.String(64), unique=True, index=True)
+    email = db.Column(db.String(64), nullable=False, unique=True, index=True)
     name = db.Column(db.String(64))
     locale = db.Column(db.String(5), default='en')
     location = db.Column(db.String(64))
@@ -64,8 +64,7 @@ class User(CRUDMixin, UserMixin, db.Model):
     birthdate = db.Column(db.Date)
 
     password_hash = db.Column(db.String(256), nullable=False)
-    token = db.Column(db.String(256), index=True, unique=True)
-    active = db.Column(db.Boolean, default=True, nullable=False)
+    active = db.Column(db.Boolean, nullable=False, default=True)
     force_pwd_change = db.Column(db.Boolean, nullable=False, default=False)
     confirmed = db.Column(db.Boolean, default=False)
     failed_attempts = db.Column(db.Integer, nullable=False, default=0)
@@ -115,13 +114,8 @@ class User(CRUDMixin, UserMixin, db.Model):
 
     @property
     def permissions(self):
-        permissions = []
-        names = []
         for role in self._roles:
-            permissions += role.permissions
-        for permission in permissions:
-            names.append(permission.name)
-        return names
+            return [permission.name for permission in role.permissions]
 
     def has_permission(self, permission):
         if self.is_admin or permission.upper() in self.permissions:
@@ -167,50 +161,6 @@ class User(CRUDMixin, UserMixin, db.Model):
         if self.email in current_app.config['RUNE_ADMINS']:
             return True
         return False
-
-    def to_dict(self):
-        """Export user to a dictionary."""
-        return {
-            'id': self.id,
-            'username': self.username,
-            'name': self.name,
-            'email': self.email,
-            'active': self.active,
-            'is_admin': self.is_admin,
-            'force_pwd_change': self.force_pwd_change,
-            'type': self.type,
-            'failed_attempts': self.failed_attempts,
-            'roles': [role for role in self.roles],
-            'permissions': self.permissions,
-            'links': [
-                {
-                    'url': url_for('api.auth_user_details', username=self.username),
-                    'text': 'Details'
-                },
-                {
-                    'url': url_for('api.auth_user_delete', username=self.username),
-                    'text': 'Delete'
-                },
-            ]
-
-        }
-
-    def from_dict(self, data, new_user=False):
-        allowed_fields = [
-            'username',
-            'email',
-            'name',
-            'birthdate',
-            'locale',
-            'location',
-        ]
-
-        for field in allowed_fields:
-            if field in data:
-                setattr(self, field, data[field])
-
-        if new_user and 'password' in data:
-            self.set_password(data['password'])
 
     @staticmethod
     def on_changed_email(target, value, oldvalue, initiator):

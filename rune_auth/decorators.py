@@ -19,8 +19,10 @@ def permission_required(permission):
             if current_user.has_permission(permission):
                 return f(*args, **kwargs)
             if current_user.has_permission('AUTH-PERMISSION_MISSING'):
-                flash(_('Missing permission %(permission)s', permission=b(permission)),
-                      'warning')
+                if not request.is_json:
+                    flash(_('Missing permission %(permission)s',
+                            permission=b(permission)),
+                          'warning')
             abort(403)
         return decorated_function
     return decorator
