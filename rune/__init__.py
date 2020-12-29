@@ -3,26 +3,27 @@ import logging
 import os
 from logging.handlers import RotatingFileHandler, SMTPHandler
 
+from apifairy import APIFairy
 from celery import Celery
-from flask import Flask, g, session, request
+from flask import Flask, g, request, session
 from flask_babel import Babel
 from flask_bs4 import Bootstrap
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import current_user as cu
 from flask_mail import Mail
+from flask_marshmallow import Marshmallow
 from flask_menu import Menu
 from flask_migrate import Migrate
 from flask_moment import Moment
 from flask_pagedown import PageDown
 from flask_sqlalchemy import SQLAlchemy
-
 from rune_admin import Admin
+from rune_api import API
 from rune_auth import Auth
 from rune_basis import Basis
 from rune_error import Error
 from rune_main import Main
 from rune_theme import Theme
-
 from sqlalchemy import MetaData
 
 from .config import Config
@@ -41,10 +42,12 @@ naming_convention = {
 }
 
 
+apifairy = APIFairy()
 babel = Babel()
 bootstrap = Bootstrap()
 celery = Celery(__name__)
 db = SQLAlchemy(metadata=MetaData(naming_convention=naming_convention))
+ma = Marshmallow()
 mail = Mail()
 menu = Menu()
 migrate = Migrate()
@@ -54,6 +57,7 @@ toolbar = DebugToolbarExtension()
 
 
 rune_admin = Admin()
+rune_api = API()
 rune_auth = Auth()
 rune_basis = Basis()
 rune_error = Error()
@@ -111,9 +115,11 @@ def create_app(test_config=None):
         app.rune_apps = {}
 
     # Init Flask extensions
+    apifairy.init_app(app)
     babel.init_app(app)
     bootstrap.init_app(app)
     db.init_app(app)
+    ma.init_app(app)
     mail.init_app(app)
     menu.init_app(app)
     migrate.init_app(app, db, render_as_batch=is_sqlite)
@@ -186,6 +192,7 @@ def create_app(test_config=None):
     # Keep this order, so that other blueprints register the routes
     # before `admin` is initialized.
     rune_admin.init_app(app)
+    rune_api.init_app(app)
     rune_theme.init_app(app)
 
     app.logger.setLevel(logging.INFO)
