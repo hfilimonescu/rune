@@ -1,39 +1,51 @@
 from datetime import date
 from time import sleep
 
-
+from apifairy import arguments, body, other_responses, response
 from flask import abort, json, redirect, request
-
-
-from rhhr.util.url import url_for
-
+from flask_login import current_user
+from rune.util.url import url_for
 from rune_api.bp import bp
+from rune_auth.decorators import permission_required as pr
+
 from rune_main.models import Notification
+from rune_main.schemes import (FilterSchema, notification_schema,
+                               notifications_schema)
 
 
-@bp.route('/v1/notifications/', methods=['POST'])
-def notification_notification_create():
-    json_data = request.get_json()
-
-    notification = Notification()
-    notification.from_json(json_data)
+@bp.route('/v1/main/notifications/', methods=['POST'])
+@body(notification_schema)
+@response(notification_schema)
+@pr('MAIN_ADMIN-SYSMSG-CREATE')
+def main_notification_create(notification):
+    """Create Notification"""
+    notification.author_id = current_user.id
     notification.update()
 
-    return notification.to_json(), 201
+    return notification, 201
 
 
-@bp.route('/v1/notifications/', methods=['GET'])
-def notification_notification_list():
+@bp.route('/v1/main/notifications/', methods=['GET'])
+@response(notifications_schema)
+@body(FilterSchema)
+@pr('MAIN_ADMIN-SYSMSG-LIST')
+def main_notification_list(body_filter):
+    """Notification List
+    returns a list of notifications.
+    """
+    if len(body_filter) == 0:
+        return Notification.read()
+
     resources = Notification.query
 
-    all = request.args.get('all')
+    all = body_filter.get('all')
 
     if not all:
-        id = request.args.get('id')
-        author_id = request.args.get('author_id')
-        locale = request.args.get('locale')
-        start_date = request.args.get('start_date', date.today())
-        end_date = request.args.get('end_date', date.today())
+        id = body_filter.get('id')
+        author_id = body_filter.get('author_id')
+        locale = body_filter.get('locale')
+        start_date = body_filter.get('start_date')
+        end_date = body_filter.get('end_date')
 
         if id:
             resources = resources.filter_by(id=id)
@@ -48,35 +60,35 @@ def notification_notification_list():
 
     resources = resources.all()
 
-    if not resources:
-        abort(404, 'The requested resource was not found on the server.')
-
-    return {'notifications': [item.to_json() for item in resources]}
+    return resources
 
 
-@ bp.route('/v1/notifications/', methods=['PUT'])
-def notification_notification_update():
-    json_data = request.get_json()
+@bp.route('/v1/main/notifications/', methods=['PUT'])
+@response(notification_schema)
+@body(notification_schema)
+@pr('MAIN_ADMIN-SYSMSG-EDIT')
+def main_notification_update(notification):
+    """Edit Notifications"""
+    if not Notification.query.get(notification.id):
+        abort(404)
 
-    notification = Notification.query.get(json_data['id'])
-
-    if not notification:
-        abort(404, 'The requested resource was not found on the server.')
-
-    notification.from_json(json_data)
+    notification.author_id = current_user.id
     notification.update()
 
-    return notification.to_json()
+    return notification
 
 
-@ bp.route('/v1/notifications/', methods=['DELETE'])
+@bp.route('/v1/main/notifications/', methods=['DELETE'])
+@pr('MAIN_ADMIN-SYSMSG-DELETE')
+@response(notification_schema)
 def main_notification_delete():
-    json_data = request.get_json()
+    """Delete Notification"""
+    data = request.get_json()
 
-    notification = Notification.query.get(json_data['id'])
+    notification = Notification.query.get(data.get('id'))
 
     if not notification:
-        abort(404, 'The requested resource was not found on the server.')
+        abort(404)
 
     notification.delete()
 

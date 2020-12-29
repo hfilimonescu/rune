@@ -92,7 +92,7 @@ def _process_app(app_name=None, action=None):
     icon='cog',
 )
 @permission_required('MENU-ADMIN-BASIS')
-def basis_main():
+def basis():
     return render_template('admin.base.html.j2')
 
 

@@ -25,13 +25,11 @@ from .models import Notification
 @permission_required('MAIN_ADMIN-SYSMSG-LIST')
 def main_sysmsg_list():
     messages = Notification.query.all()
-    # https://stackoverflow.com/a/21338304
-    form = MessageForm(locale=cu.locale)
 
-    return render_template('main/admin.message.list.html.j2',
-                           messages=messages,
-                           form=form,
-                           languages=current_app.config.get('OHIE_LANGS'))
+    return render_template(
+        'main/admin.message.list.html.j2',
+        messages=messages,
+    )
 
 
 @bp.route('/main/message/create/', methods=['GET', 'POST'])

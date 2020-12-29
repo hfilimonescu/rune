@@ -24,6 +24,7 @@ class Main:
 
         from . import admin  # noqa
         from . import routes  # noqa
+        from . import api  # noqa
 
         # Register `RUNE_Main` to `app.extensions`
         if not hasattr(app, 'extensions'):

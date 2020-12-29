@@ -30,7 +30,7 @@ class Error:
 
         from .bp import bp  # noqa
 
-        @bp.app_errorhandler(HTTPException)
+        @app.errorhandler(HTTPException)
         def handle_exception(e):
             """Generic Exception Handlers
 
@@ -47,6 +47,7 @@ class Error:
                     "code": e.code,
                     "name": e.name,
                     "description": e.description,
+                    "version": __version__,
                 })
                 response.content_type = "application/json"
                 return response

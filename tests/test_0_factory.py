@@ -7,7 +7,7 @@ class TestFactory:
     app = create_app(
         {
             "TESTING": True,
-            "RHHR_API_ENABLED": True,
+            "RUNE_API_ENABLED": True,
             "SQLALCHEMY_TRACK_MODIFICATIONS": True,
         }
     )
