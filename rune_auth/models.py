@@ -114,8 +114,11 @@ class User(CRUDMixin, UserMixin, db.Model):
 
     @property
     def permissions(self):
+        permissions = list()
         for role in self._roles:
-            return [permission.name for permission in role.permissions]
+            for permission in role.permissions:
+                permissions.append(permission.name)
+        return list(set(permissions))
 
     def has_permission(self, permission):
         if self.is_admin or permission.upper() in self.permissions:
@@ -208,11 +211,15 @@ class Role(CRUDMixin, db.Model):
         if permission not in self.permissions:
             self.permissions.append(permission)
             self.update()
+            return True
+        return None
 
     def remove_permission(self, permission):
         if permission in self.permissions:
             self.permissions.remove(permission)
             self.update()
+            return True
+        return None
 
     @validates('name')
     def validate_name(self, key, value):
@@ -262,9 +269,11 @@ class AuthUserPreference(CRUDMixin, db.Model):
     name = db.Column(db.String(64), nullable=False)
     value = db.Column(db.String(64))
     user_id = db.Column(db.Integer, db.ForeignKey('auth_users.id'))
-    user = db.relationship('User',
-                           foreign_keys=[user_id],
-                           backref=db.backref('preferences', lazy='dynamic'))
+    user = db.relationship(
+        'User',
+        foreign_keys=[user_id],
+        backref=db.backref('preferences', lazy='dynamic'),
+    )
 
     def __str__(self):
         return f'{self.name}'
